@@ -36,7 +36,7 @@ function PaymentPage() {
       };
 
       // Send the order details to the server
-      await fetch('http://localhost:5000/submitOrder', {
+      await fetch('https://pizza-house-without-payment-api.vercel.app/submitOrder', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
