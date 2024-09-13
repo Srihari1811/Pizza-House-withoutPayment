@@ -28,7 +28,7 @@ function AddProduct() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/addcategories');
+        const response = await axios.get('https://pizza-house-without-payment-api.vercel.app/addcategories');
         setCategories(response.data);
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -41,7 +41,7 @@ function AddProduct() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/addproducts');
+        const response = await axios.get('https://pizza-house-without-payment-api.vercel.app/addproducts');
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -80,7 +80,7 @@ function AddProduct() {
         available: true, // Default to available
       };
 
-      const response = await axios.post('http://localhost:5000/addProducts', formData);
+      const response = await axios.post('https://pizza-house-without-payment-api.vercel.app/addProducts', formData);
 
       setProducts((prevProducts) => [...prevProducts, response.data]);
       setProductName('');
@@ -125,7 +125,7 @@ function AddProduct() {
     }
   
     try {
-      const response = await axios.put(`http://localhost:5000/addproducts/${editingProductId}`, {
+      const response = await axios.put(`https://pizza-house-without-payment-api.vercel.app/addproducts/${editingProductId}`, {
         name: editProductName,
         imageUrl: imageUrl,
         price: editProductPrice,
@@ -155,7 +155,7 @@ function AddProduct() {
   // Remove product
   const handleRemoveProduct = async (productId) => {
     try {
-      await axios.delete(`http://localhost:5000/addproducts/${productId}`);
+      await axios.delete(`https://pizza-house-without-payment-api.vercel.app/addproducts/${productId}`);
       setProducts((prevProducts) =>
         prevProducts.filter((product) => product._id !== productId)
       );
@@ -169,7 +169,7 @@ function AddProduct() {
   const handleToggleAvailability = async (productId, currentAvailability) => {
     try {
       const newAvailability = !currentAvailability;
-      const response = await axios.put(`http://localhost:5000/addproducts/${productId}`, {
+      const response = await axios.put(`https://pizza-house-without-payment-api.vercel.app/addproducts/${productId}`, {
         available: newAvailability
       });
 
