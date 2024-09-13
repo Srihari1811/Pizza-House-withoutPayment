@@ -12,7 +12,7 @@ function MyOrders() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch('http://localhost:5000/getOrders');
+        const response = await fetch('https://pizza-house-without-payment-api.vercel.app/getOrders');
         if (!response.ok) {
           throw new Error('Failed to fetch orders');
         }
@@ -34,7 +34,7 @@ function MyOrders() {
 
   const handleStatusChange = async (orderId) => {
     try {
-      const response = await fetch(`http://localhost:5000/updateOrderStatus/${orderId}`, {
+      const response = await fetch(`https://pizza-house-without-payment-api.vercel.app/updateOrderStatus/${orderId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
