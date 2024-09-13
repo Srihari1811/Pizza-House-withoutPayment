@@ -157,7 +157,7 @@ function HomePage() {
             <div className="card-body">
               <h5 className="card-title">Special Deal</h5>
               <p className="card-text">Grab your favorite items at amazing prices!</p>
-              <Link to="/special-deals" className="btn" style={{ backgroundColor: 'black', color: 'yellow' }}>
+              <Link to="/" className="btn" style={{ backgroundColor: 'black', color: 'yellow' }}>
   Buy Now
 </Link>
             </div>
@@ -197,7 +197,7 @@ function HomePage() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className={`nav-link text-light text-center ${getActiveClass('/special-deals')}`} to="/special-deals">
+            <Link className={`nav-link text-light text-center ${getActiveClass('/special-deals')}`} to="/">
               <i className="fas fa-gift"></i>
               <div>Deals</div>
             </Link>
