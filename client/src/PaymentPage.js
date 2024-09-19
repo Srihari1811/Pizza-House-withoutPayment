@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './PaymentPage.css';
 import { FaHome, FaArrowLeft } from 'react-icons/fa';
 
+
 function PaymentPage() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ function PaymentPage() {
       };
 
       // Send the order details to the server
-      await fetch('https://pizza-house-without-payment-api.vercel.app/submitOrder', {
+      await fetch('http://localhost:5000/submitOrder', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -93,27 +94,51 @@ function PaymentPage() {
           </div>
 
           {isSubmitted ? (
-            <div className="order-summary-container text-center">
-              <h5 className="mb-4 text-danger font-weight-bold" style={{ textDecoration: 'underline', fontSize: '1.6rem' }}>
-                Order Summary
-              </h5>
-              <div className="order-summary-details">
-                <p><strong>Date and Time: </strong> {orderDate}</p>
-                <p><strong>Name: </strong> {name}</p>
-                <p><strong>Mobile: </strong> {mobile}</p>
-                <p><strong>Table Number: </strong> {tableNumber}</p>
-                <p><strong>Total Price: </strong> ₹{formattedAmount}</p>
-              </div>
-              <h5 className="mt-4 text-danger font-weight-bold" style={{ textDecoration: 'underline', fontSize: '1.6rem' }}>
-                Cart Items
-              </h5>
-              <ul className="list-unstyled">
-                {cartItems.map(item => (
-                  <li key={item._id}>{item.name} - ₹{item.price} x {item.quantity || 1}</li>
-                ))}
-              </ul>
-              <button className="btn btn-primary mt-3" onClick={handlePayment}>Place your Order</button>
-            </div>
+            <div>
+   <div class="container"style={{ backgroundColor: 'white',height:'500px' }}>
+   <div className="order-summary" >
+     <h2>Order Summary</h2>
+     <ul class="order-details">
+       <li>
+         <span><strong>Date and Time</strong></span>
+         <span>:</span>
+         <span>{orderDate}</span>
+       </li><li>
+   <span><strong>Name</strong></span>
+   <span>:</span>
+   <span>{name}</span>
+ </li>
+ <li>
+   <span><strong>Mobile</strong></span>
+   <span>:</span>
+   <span>{mobile}</span>
+ </li>
+ <li>
+   <span><strong>Table Number</strong></span>
+   <span>:</span>
+   <span>{tableNumber}</span>
+ </li>
+ <li>
+   <span><strong>Total Price</strong></span>
+   <span>:</span>
+   <span>₹{formattedAmount}</span>
+ </li>
+</ul>
+<h3 className='border-bottom p-2' style={{textAlign:'center',color:'#ffa500',fontFamily:'Times New Roman',fontWeight:'bold',fontSize:'35px'}}>Cart Items</h3>
+<ul class="cart-details">
+{cartItems.map(item => (
+ <li key={item._id}>
+   <span ><strong tyle={{width:'100px'}}> {item.name}</strong></span>
+   <span>-</span>
+   <span>₹{item.price} x {item.quantity || 1}</span>
+ </li>
+ ))}
+</ul>
+<button class="btn btn-primary mt-3">Place your Order</button>
+</div>
+</div>
+</div>
+ 
           ) : (
             <form onSubmit={handleSubmit} className="text-center">
               <div className="mb-3">
