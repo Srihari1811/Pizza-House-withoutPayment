@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './PaymentPage.css';
 import { FaHome, FaArrowLeft } from 'react-icons/fa';
 
-
 function PaymentPage() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -95,62 +94,63 @@ function PaymentPage() {
 
           {isSubmitted ? (
             <div>
-   <div class="container"style={{ backgroundColor: 'white',height:'500px' }}>
-   <div className="order-summary" >
-     <h2>Order Summary</h2>
-     <ul class="order-details">
-       <li>
-         <span><strong>Date and Time</strong></span>
-         <span>:</span>
-         <span>{orderDate}</span>
-       </li><li>
-   <span><strong>Name</strong></span>
-   <span>:</span>
-   <span>{name}</span>
- </li>
- <li>
-   <span><strong>Mobile</strong></span>
-   <span>:</span>
-   <span>{mobile}</span>
- </li>
- <li>
-   <span><strong>Table Number</strong></span>
-   <span>:</span>
-   <span>{tableNumber}</span>
- </li>
- <li>
-   <span><strong>Total Price</strong></span>
-   <span>:</span>
-   <span>₹{formattedAmount}</span>
- </li>
-</ul>
-<h3 className='border-bottom p-2' style={{textAlign:'center',color:'#ffa500',fontFamily:'Times New Roman',fontWeight:'bold',fontSize:'35px'}}>Cart Items</h3>
-<ul class="cart-details">
-{cartItems.map(item => (
- <li key={item._id}>
-   <span ><strong tyle={{width:'100px'}}> {item.name}</strong></span>
-   <span>-</span>
-   <span>₹{item.price} x {item.quantity || 1}</span>
- </li>
- ))}
-</ul>
-<button class="btn btn-primary mt-3">Place your Order</button>
-</div>
-</div>
-</div>
- 
+              <div className="order-summary-container p-3" style={{ backgroundColor: '#fff', borderRadius: '15px', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)', maxWidth: '600px', margin: 'auto', textAlign: 'left', padding: '30px', backgroundSize: 'cover', backgroundPosition: 'center', marginLeft: '30px' }}>
+                <div style={{ marginLeft: '5px', marginTop: '5px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.5)', padding: '15px' }}>
+                  <h4 className="mb-4 text-warning font-weight-bold border-bottom p-2" style={{ fontSize: '2rem', textAlign: 'center', fontFamily: 'League Spartan', fontWeight: 'bold' }}>
+                    Order Summary 
+                  </h4>
+
+                  <div className="order-summary-details" style={{ color: 'black', fontSize: '16px' }}>
+                    <div className="d-flex">
+                      <p><strong>Date and Time</strong></p>
+                      <div style={{ marginLeft: '150px' }}><p>&#58;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{orderDate}</p></div>
+                    </div>
+                    <div className="d-flex">
+                      <p><strong>Name</strong></p>
+                      <div style={{ marginLeft: '215px' }}><p>&#58;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{name}</p></div>
+                    </div>
+                    <div className="d-flex">
+                      <p><strong>Mobile</strong></p>
+                      <p style={{ marginLeft: '207px' }}>&#58;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{mobile}</p>
+                    </div>
+                    <div className="d-flex">
+                      <p><strong>Table Number</strong></p>
+                      <p style={{ marginLeft: '155px' }}>&#58;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{tableNumber}</p>
+                    </div>
+                    <div className="d-flex">
+                      <p><strong>Total Price</strong></p>
+                      <p style={{ marginLeft: '183px' }}>&#58;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;₹{formattedAmount}</p>
+                    </div>
+                  </div>
+
+                  <h4 className="mt-4 text-warning font-weight-bold border-bottom p-2" style={{ fontSize: '2.3rem', textAlign: 'center', fontFamily: 'League Spartan', fontWeight: 'bold' }}>
+                    Cart Items
+                  </h4>
+
+
+                  <ol style={{ padding: '0', color: 'black' }}>
+  {cartItems.map((item, index) => (
+    <li key={item._id} className="d-flex justify-content-between py-2" style={{ fontSize: '16px' }}>
+      <span><strong>{index + 1}. {item.name}</strong></span>
+      <span className="rate" style={{ marginRight: '130px', display: 'flex' }}>- ₹{item.price} x {item.quantity || 1}</span>
+    </li>
+  ))}
+</ol>
+
+
+                  <div className="text-center">
+                    <button className="btn btn-primary mt-4 mx-auto" style={{ width: '100%', maxWidth: '400px', fontSize: '1.2rem', backgroundColor: 'blue', border: 'none', color: 'white' }} onClick={handlePayment}>
+                      Place your Order
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           ) : (
             <form onSubmit={handleSubmit} className="text-center">
               <div className="mb-3">
                 <label htmlFor="name" className="form-label">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  className="form-control text-center"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
+                <input type="text" id="name" className="form-control text-center" value={name} onChange={(e) => setName(e.target.value)} required />
               </div>
               <div className="mb-3">
                 <label htmlFor="mobile" className="form-label">Mobile Number</label>
@@ -165,28 +165,25 @@ function PaymentPage() {
                   maxLength="10"
                 />
               </div>
-              <div className="mb-3 row justify-content-center">
-                <label htmlFor="tableNumber" className="form-label col-12">Table Number</label>
-                <div className="col-12 col-sm-8 col-md-6 col-lg-4">
-                  <select
-                    id="tableNumber"
-                    className="form-control text-center"
-                    value={tableNumber}
-                    onChange={(e) => setTableNumber(e.target.value)}
-                    required
-                  >
-                    <option value="">Select a table</option>
-                    {[...Array(10)].map((_, index) => (
-                      <option key={index + 1} value={index + 1}>
-                        {index + 1}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
 
-              <h4 className="text-center custom-total-price">Payable Amount: ₹{formattedAmount}</h4>
-              <button type="submit" className="btn btn-primary">Submit</button>
+              <div className="mb-3">
+                <label htmlFor="tableNumber" className="form-label">Table Number</label>
+                <select type="text" id="tableNumber" className="form-control text-center" value={tableNumber} onChange={(e) => setTableNumber(e.target.value)}>
+<option value={""}>Select a Table number</option>
+<option value={'1'}>1</option>
+<option value={"2"}>2</option>
+<option value={"3"}>3</option>
+<option value={"4"}>4</option>
+<option value={"5"}>5</option>
+<option value={"6"}>6</option>
+<option value={"7"}>7</option>
+<option value={"8"}>8</option>
+<option value={"9"}>9</option>
+<option value={"10"}>10</option>
+
+                  </select>
+              </div>
+              <button type="submit" className="btn btn-primary mt-4">Submit</button>
             </form>
           )}
         </>
